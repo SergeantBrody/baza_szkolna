@@ -74,14 +74,15 @@ def wypisz_uczniow_wychowawcy(imie_wychowawcy, nazwisko_wychowawcy):
             return znajdz_uczniow_klasy(wychowawca.nazwa_klasy)
 
 
-koniec_utworz = False
-koniec_zarzadzaj = False
+
+
 koniec_programu = False
 while not koniec_programu:
     print("---PROGRAM DO OBSLUGI BAZY SZKOLNEJ---")
     operacja = input("1. Utworz\n2. Zarzadzaj\n3. Koniec")
     if operacja == "1":  # Utworz
-        while not koniec_utworz:
+        utworz = True
+        while utworz:
             utworz_obiekt = input("Kogo chcesz utworzyc ?:\nNauczyciel\nUczen\nWychowawca\nKoniec\n").capitalize()
             if utworz_obiekt == "Uczen":
                 imie = input("Podaj imie ucznia:").capitalize()
@@ -107,11 +108,12 @@ while not koniec_programu:
                 nazwa_klasy = input("Podaj klase wychowawcy:").upper()
                 wychowawcy.append(Wychowawca(imie=imie, nazwisko=nazwisko, nazwa_klasy=nazwa_klasy))
             elif utworz_obiekt == "Koniec":
-                koniec_utworz = True
+                utworz = False
             else:
                 print("Niepoprawne dane wejsciowe, sprobuj jeszcze raz")
     elif operacja == "2":  # Zarzadzaj
-        while not koniec_zarzadzaj:
+        zarzadzaj = True
+        while zarzadzaj:
             typ_uzytkownika = input("Podaj typ uzytkownika:\nklasa\nuczen\nnauczyciel\nwychowawca\nkoniec\n").lower()
             if typ_uzytkownika == "klasa":
                 nazwa_klasy = input("Podaj nazwe klasy np. 3C").upper()
@@ -135,7 +137,8 @@ while not koniec_programu:
                 wypisz_uczniow = wypisz_uczniow_wychowawcy(imie_wychowawcy, nazwisko_wychowawcy)
                 print(wypisz_uczniow)
             elif typ_uzytkownika == "koniec":
-                koniec_zarzadzaj = True
+                zarzadzaj = False
+
             else:
                 print("Niepoprawne dane wejsciowe")
     elif operacja == "3":  # Koniec
